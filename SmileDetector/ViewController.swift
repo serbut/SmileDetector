@@ -16,6 +16,29 @@ class ViewController: UIViewController {
     @IBOutlet weak var smilingTimeLabel: UILabel!
     
     // MARK: - Properties
+    
+    let TIMER_STEP: TimeInterval = 0.01
+    var timer = Timer()
+    var secondsCounter: TimeInterval = 0
+    
+    var isSmiling = false {
+        didSet {
+            switch isSmiling {
+            case true:
+                if timer.isValid { break }
+                DispatchQueue.main.async {
+                    self.timer = Timer.scheduledTimer(timeInterval: self.TIMER_STEP,
+                                             target: self,
+                                             selector: #selector(self.updateTimer),
+                                             userInfo: nil,
+                                             repeats: true)
+                }
+            case false:
+                self.timer.invalidate()
+            }
+        }
+    }
+    
     var session = AVCaptureSession()
 
     lazy var previewLayer: AVCaptureVideoPreviewLayer? = {
@@ -35,7 +58,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         sessionPrepare()
         session.startRunning()
     }
@@ -121,9 +144,7 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         
         for feature in features {
             if let faceFeature = feature as? CIFaceFeature {
-                DispatchQueue.main.async {
-                    self.smilingTimeLabel.text = "has smile: \(faceFeature.hasSmile)"
-                }
+                isSmiling = faceFeature.hasSmile
             }
         }
     }
@@ -139,5 +160,23 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         default:
             return 6
         }
+    }
+}
+
+// MARK: - Timer
+extension ViewController {
+    @objc func updateTimer() {
+        secondsCounter += TIMER_STEP
+        DispatchQueue.main.async {
+            self.smilingTimeLabel.text = "Smiling Time: \(self.timeString())"
+        }
+    }
+    
+    func timeString() -> String {
+        let minutes = Int(secondsCounter) / 60 % 60
+        let seconds = Int(secondsCounter) % 60
+        let milliseconds = Int(secondsCounter.truncatingRemainder(dividingBy: 1) * 100)
+        
+        return String(format: "%02i:%02i.%02i", arguments: [minutes, seconds, milliseconds])
     }
 }
