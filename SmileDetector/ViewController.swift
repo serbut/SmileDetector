@@ -80,6 +80,7 @@ class ViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         previewLayer?.frame = view.frame
+        updateTimerLabel()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -156,11 +157,14 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         
         guard let features = allFeatures else { return }
         
-        for feature in features {
-            if let faceFeature = feature as? CIFaceFeature {
-                isSmiling = faceFeature.hasSmile
-            }
+        let faceFeature = features.flatMap { $0 as? CIFaceFeature }.first
+
+        if let faceFeature = faceFeature {
+            isSmiling = faceFeature.hasSmile
+        } else {
+            isSmiling = false // face is not visible
         }
+        
     }
     
     func exifOrientation(orientation: UIDeviceOrientation) -> Int {
@@ -181,8 +185,12 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
 extension ViewController {
     @objc func updateTimer() {
         secondsCounter += TIMER_STEP
+        updateTimerLabel()
+    }
+    
+    func updateTimerLabel() {
         DispatchQueue.main.async {
-            self.smilingTimeLabel.text = "Smiling Time: \(self.timeString())"
+            self.smilingTimeLabel.text = self.timeString()
         }
     }
     
