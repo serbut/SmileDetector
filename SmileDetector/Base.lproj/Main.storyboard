@@ -75,6 +75,7 @@
                     </view>
                     <connections>
                         <outlet property="permissionNotGrantedView" destination="wFZ-Mc-59i" id="eDo-Jd-Rd6"/>
+                        <outlet property="smileTopLabel" destination="2lW-5t-I45" id="aUa-gu-70H"/>
                         <outlet property="smilingTimeLabel" destination="Cjf-Be-RqH" id="zBE-QT-cWf"/>
                     </connections>
                 </viewController>

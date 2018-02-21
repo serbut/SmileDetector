@@ -13,6 +13,7 @@ class ViewController: UIViewController {
 
     // MARK: - IBOutlets
     @IBOutlet weak var permissionNotGrantedView: UIView!
+    @IBOutlet weak var smileTopLabel: UILabel!
     @IBOutlet weak var smilingTimeLabel: UILabel!
     
     // MARK: - Properties
@@ -27,6 +28,7 @@ class ViewController: UIViewController {
             case true:
                 if timer.isValid { break }
                 DispatchQueue.main.async {
+                    self.smileTopLabel.isHidden = true
                     self.timer = Timer.scheduledTimer(timeInterval: self.TIMER_STEP,
                                              target: self,
                                              selector: #selector(self.updateTimer),
@@ -34,7 +36,10 @@ class ViewController: UIViewController {
                                              repeats: true)
                 }
             case false:
-                self.timer.invalidate()
+                DispatchQueue.main.async {
+                    self.smileTopLabel.isHidden = false
+                    self.timer.invalidate()
+                }
             }
         }
     }
@@ -61,6 +66,14 @@ class ViewController: UIViewController {
         
         sessionPrepare()
         session.startRunning()
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
+    }
+    
+    @objc func appMovedToBackground() {
+        timer.invalidate()
+        secondsCounter = 0
     }
     
     override func viewDidLayoutSubviews() {
@@ -76,6 +89,7 @@ class ViewController: UIViewController {
         view.layer.addSublayer(previewLayer)
         
         view.bringSubview(toFront: smilingTimeLabel) // FIX
+        view.bringSubview(toFront: smileTopLabel)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
