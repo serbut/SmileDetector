@@ -65,11 +65,20 @@ class ViewController: UIViewController {
                                   context: nil,
                                   options: [CIDetectorAccuracy : CIDetectorAccuracyLow])
     
+    // MARK: - Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        sessionPrepare()
-        session.startRunning()
+        checkCameraPermission { granted in
+            DispatchQueue.main.async {
+                self.updatePermissionUI(granted: granted)
+            }
+            if granted {
+                self.sessionPrepare()
+                self.session.startRunning()
+            }
+        }
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
@@ -208,5 +217,24 @@ extension ViewController {
         let milliseconds = Int(secondsCounter.truncatingRemainder(dividingBy: 1) * 100)
         
         return String(format: "%02i:%02i.%02i", arguments: [minutes, seconds, milliseconds])
+    }
+}
+
+// MARK: - Permissions
+extension ViewController {
+    func checkCameraPermission(completion: @escaping (Bool) -> Void) {
+        if AVCaptureDevice.authorizationStatus(for: .video) ==  .authorized {
+            completion(true)
+        } else {
+            AVCaptureDevice.requestAccess(for: .video, completionHandler: { (granted: Bool) in
+                completion(granted)
+            })
+        }
+    }
+    
+    func updatePermissionUI(granted: Bool) {
+        permissionNotGrantedView.isHidden = granted
+        smileTopLabel.isHidden = !granted
+        smilingTimeLabel.isHidden = !granted
     }
 }
