@@ -20,11 +20,13 @@ class ViewController: UIViewController {
         }
     }
     
-    // MARK: - Properties
+    // MARK: -  Timer Properties
     
     let TIMER_STEP: TimeInterval = 0.01
     var timer = Timer()
     var secondsCounter: TimeInterval = 0
+    
+    // MARK: -  Face Detection Properties
     
     var isSmiling = false {
         didSet {
@@ -35,10 +37,10 @@ class ViewController: UIViewController {
                     self.smileTopLabel.isHidden = true
                     self.timer.invalidate()
                     self.timer = Timer.scheduledTimer(timeInterval: self.TIMER_STEP,
-                                             target: self,
-                                             selector: #selector(self.updateTimer),
-                                             userInfo: nil,
-                                             repeats: true)
+                                                      target: self,
+                                                      selector: #selector(self.updateTimer),
+                                                      userInfo: nil,
+                                                      repeats: true)
                 }
             case false:
                 DispatchQueue.main.async {
@@ -78,21 +80,11 @@ class ViewController: UIViewController {
             if granted {
                 self.sessionPrepare()
                 self.session.startRunning()
+                let notificationCenter = NotificationCenter.default
+                notificationCenter.addObserver(self, selector: #selector(self.appMovedToBackground), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
+                notificationCenter.addObserver(self, selector: #selector(self.appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
             }
         }
-        
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
-    }
-    
-    @objc func appMovedToBackground() {
-        timer.invalidate()
-        secondsCounter = 0
-    }
-    
-    @objc func appMovedToForeground() {
-        updateTimerLabel()
     }
     
     override func viewDidLayoutSubviews() {
@@ -119,6 +111,17 @@ class ViewController: UIViewController {
         let deviceOrientation = UIDevice.current.orientation
         previewLayer.connection?.videoOrientation = AVCaptureVideoOrientation.init(deviceOrientantion: deviceOrientation)
     }
+    
+    @objc func appMovedToBackground() {
+        timer.invalidate()
+        secondsCounter = 0
+    }
+    
+    @objc func appMovedToForeground() {
+        updateTimerLabel()
+    }
+    
+    //MARK: - IBActions
     
     @IBAction func settingsButtonPushed(_ sender: UIButton) {
         UIApplication.shared.open(URL(string:"App-Prefs:root")!, options: [:], completionHandler: nil)
@@ -169,18 +172,18 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
         let attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, sampleBuffer, kCMAttachmentMode_ShouldPropagate)
         let ciImage = CIImage(cvImageBuffer: pixelBuffer!, options: attachments as! [String : Any]?)
-        let options: [String : Any] = [CIDetectorImageOrientation: exifOrientation(orientation: UIDevice.current.orientation),
-                       CIDetectorSmile: true]
-        let allFeatures = faceDetector?.features(in: ciImage, options: options)
-        
-        guard let features = allFeatures else { return }
-        
-        let faceFeature = features.flatMap { $0 as? CIFaceFeature }.first
+        let options: [String : Any] = [
+            CIDetectorImageOrientation: exifOrientation(orientation: UIDevice.current.orientation),
+            CIDetectorSmile: true
+        ]
 
-        if let faceFeature = faceFeature {
+        guard let features = faceDetector?.features(in: ciImage, options: options) else { return }
+
+        if let faceFeature = (features.flatMap { $0 as? CIFaceFeature }.first) {
             isSmiling = faceFeature.hasSmile
         } else {
-            isSmiling = false // face is not visible
+            // face is not visible
+            isSmiling = false
         }
         
     }
