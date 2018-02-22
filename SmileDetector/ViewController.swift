@@ -33,6 +33,7 @@ class ViewController: UIViewController {
                 if timer.isValid { break }
                 DispatchQueue.main.async {
                     self.smileTopLabel.isHidden = true
+                    self.timer.invalidate()
                     self.timer = Timer.scheduledTimer(timeInterval: self.TIMER_STEP,
                                              target: self,
                                              selector: #selector(self.updateTimer),
@@ -156,7 +157,7 @@ extension ViewController {
             output.setSampleBufferDelegate(self, queue: queue)
             
         } catch {
-            print("error with creating AVCaptureDeviceInput")
+            print("Error creating AVCaptureDeviceInput")
         }
     }
 }
