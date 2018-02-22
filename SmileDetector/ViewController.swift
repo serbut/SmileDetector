@@ -97,7 +97,7 @@ class ViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        previewLayer?.frame = view.frame
+        previewLayer?.frame = permissionNotGrantedView.frame
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -106,7 +106,7 @@ class ViewController: UIViewController {
         guard let previewLayer = previewLayer else { return }
         view.layer.addSublayer(previewLayer)
         
-        view.bringSubview(toFront: smilingTimeLabel) // FIX
+        view.bringSubview(toFront: smilingTimeLabel)
         view.bringSubview(toFront: smileTopLabel)
     }
     
