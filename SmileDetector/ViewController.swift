@@ -73,6 +73,7 @@ class ViewController: UIViewController {
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
     }
     
     @objc func appMovedToBackground() {
@@ -80,11 +81,14 @@ class ViewController: UIViewController {
         secondsCounter = 0
     }
     
+    @objc func appMovedToForeground() {
+        updateTimerLabel()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         previewLayer?.frame = view.frame
-        updateTimerLabel()
     }
     
     override func viewDidAppear(_ animated: Bool) {
