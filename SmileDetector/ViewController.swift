@@ -120,7 +120,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func settingsButtonPushed(_ sender: UIButton) {
-        // TODO: Go to settings
+        UIApplication.shared.open(URL(string:"App-Prefs:root")!, options: [:], completionHandler: nil)
     }
 }
 

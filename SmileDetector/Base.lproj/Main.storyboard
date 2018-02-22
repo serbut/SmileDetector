@@ -21,8 +21,17 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wFZ-Mc-59i">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FgS-eh-2pR">
+                                        <rect key="frame" x="30.5" y="252" width="314.5" height="142.5"/>
+                                        <string key="text">Can't detect your smile :( We need your permission to use camera
+
+To provide permission: 1) Go to Settings 2) Locate SmileDetector app 3) Turn on Camera access</string>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vba-yR-aX4">
-                                        <rect key="frame" x="139" y="352" width="98" height="30"/>
+                                        <rect key="frame" x="138.5" y="402.5" width="98" height="30"/>
                                         <state key="normal" title="Go to Settings">
                                             <color key="titleColor" red="0.98039215686274506" green="0.78431372549019607" blue="0.074509803921568626" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -30,18 +39,14 @@
                                             <action selector="settingsButtonPushed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TA6-dm-wPw"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Can't detect your smile :( We need permission to use camera" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FgS-eh-2pR">
-                                        <rect key="frame" x="48.5" y="303" width="278.5" height="41"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FgS-eh-2pR" secondAttribute="trailing" constant="30" id="16u-Md-5iD"/>
                                     <constraint firstItem="vba-yR-aX4" firstAttribute="centerX" secondItem="FgS-eh-2pR" secondAttribute="centerX" id="Qtd-74-qZA"/>
                                     <constraint firstItem="vba-yR-aX4" firstAttribute="top" secondItem="FgS-eh-2pR" secondAttribute="bottom" constant="8" id="Ug3-bs-55m"/>
                                     <constraint firstItem="FgS-eh-2pR" firstAttribute="centerX" secondItem="wFZ-Mc-59i" secondAttribute="centerX" id="dcK-0C-xyo"/>
+                                    <constraint firstItem="FgS-eh-2pR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wFZ-Mc-59i" secondAttribute="leading" constant="30" id="g5E-Yx-9VU"/>
                                     <constraint firstItem="FgS-eh-2pR" firstAttribute="centerY" secondItem="wFZ-Mc-59i" secondAttribute="centerY" id="nRg-nm-ra1"/>
                                 </constraints>
                             </view>
