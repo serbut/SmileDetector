@@ -14,7 +14,11 @@ class ViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var permissionNotGrantedView: UIView!
     @IBOutlet weak var smileTopLabel: UILabel!
-    @IBOutlet weak var smilingTimeLabel: UILabel!
+    @IBOutlet weak var smilingTimeLabel: UILabel! {
+        didSet {
+            smilingTimeLabel.font = smilingTimeLabel.font.monospacedDigitFont
+        }
+    }
     
     // MARK: - Properties
     

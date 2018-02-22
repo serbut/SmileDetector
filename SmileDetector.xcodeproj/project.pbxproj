@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07808558203F17CE00CCC8BF /* UIFont+Monospaced.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07808557203F17CE00CCC8BF /* UIFont+Monospaced.swift */; };
 		07D0539F203D7A1A002052FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D0539E203D7A1A002052FA /* AppDelegate.swift */; };
 		07D053A1203D7A1A002052FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D053A0203D7A1A002052FA /* ViewController.swift */; };
 		07D053A4203D7A1A002052FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07D053A2203D7A1A002052FA /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		07808557203F17CE00CCC8BF /* UIFont+Monospaced.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Monospaced.swift"; sourceTree = "<group>"; };
 		07D0539B203D7A1A002052FA /* SmileDetector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmileDetector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07D0539E203D7A1A002052FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		07D053A0203D7A1A002052FA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				07D053B1203DA021002052FA /* AVCaptureVideoOrientation+DeviceOrientation.swift */,
+				07808557203F17CE00CCC8BF /* UIFont+Monospaced.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 				07D053A1203D7A1A002052FA /* ViewController.swift in Sources */,
 				07D053B2203DA021002052FA /* AVCaptureVideoOrientation+DeviceOrientation.swift in Sources */,
 				07D0539F203D7A1A002052FA /* AppDelegate.swift in Sources */,
+				07808558203F17CE00CCC8BF /* UIFont+Monospaced.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
