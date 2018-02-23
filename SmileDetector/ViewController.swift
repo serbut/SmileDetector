@@ -34,7 +34,7 @@ class ViewController: UIViewController {
             case true:
                 if timer.isValid { break }
                 DispatchQueue.main.async {
-                    self.smileTopLabel.isHidden = true
+                    self.smileTopLabel.alpha = 0.0
                     self.timer.invalidate()
                     self.timer = Timer.scheduledTimer(timeInterval: self.TIMER_STEP,
                                                       target: self,
@@ -44,7 +44,12 @@ class ViewController: UIViewController {
                 }
             case false:
                 DispatchQueue.main.async {
-                    self.smileTopLabel.isHidden = false
+                    UIView.animate(withDuration: 0.2,
+                                   delay: 1.0,
+                                   options: [],
+                                   animations: {
+                        self.smileTopLabel.alpha = 1.0
+                    })
                     self.timer.invalidate()
                 }
             }
