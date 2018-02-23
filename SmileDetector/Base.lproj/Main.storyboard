@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,14 +16,14 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SmileDetector" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wFZ-Mc-59i">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FgS-eh-2pR">
-                                        <rect key="frame" x="30.5" y="252" width="314.5" height="142.5"/>
+                                        <rect key="frame" x="32.5" y="202.5" width="256" height="142.5"/>
                                         <string key="text">Can't detect your smile :( We need your permission to use camera
 
 To provide permission: 1) Go to Settings 2) Locate SmileDetector app 3) Turn on Camera access</string>
@@ -31,7 +32,7 @@ To provide permission: 1) Go to Settings 2) Locate SmileDetector app 3) Tu
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vba-yR-aX4">
-                                        <rect key="frame" x="138.5" y="402.5" width="98" height="30"/>
+                                        <rect key="frame" x="111" y="353" width="98" height="30"/>
                                         <state key="normal" title="Go to Settings">
                                             <color key="titleColor" red="0.98039215686274506" green="0.78431372549019607" blue="0.074509803921568626" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -42,23 +43,22 @@ To provide permission: 1) Go to Settings 2) Locate SmileDetector app 3) Tu
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FgS-eh-2pR" secondAttribute="trailing" constant="30" id="16u-Md-5iD"/>
                                     <constraint firstItem="vba-yR-aX4" firstAttribute="centerX" secondItem="FgS-eh-2pR" secondAttribute="centerX" id="Qtd-74-qZA"/>
                                     <constraint firstItem="vba-yR-aX4" firstAttribute="top" secondItem="FgS-eh-2pR" secondAttribute="bottom" constant="8" id="Ug3-bs-55m"/>
                                     <constraint firstItem="FgS-eh-2pR" firstAttribute="centerX" secondItem="wFZ-Mc-59i" secondAttribute="centerX" id="dcK-0C-xyo"/>
-                                    <constraint firstItem="FgS-eh-2pR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wFZ-Mc-59i" secondAttribute="leading" constant="30" id="g5E-Yx-9VU"/>
                                     <constraint firstItem="FgS-eh-2pR" firstAttribute="centerY" secondItem="wFZ-Mc-59i" secondAttribute="centerY" id="nRg-nm-ra1"/>
+                                    <constraint firstItem="FgS-eh-2pR" firstAttribute="width" secondItem="wFZ-Mc-59i" secondAttribute="width" multiplier="0.8" id="uhN-qJ-Ny3"/>
                                 </constraints>
                             </view>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Smile :)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lW-5t-I45">
-                                <rect key="frame" x="0.0" y="20" width="375" height="38.5"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="38.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <color key="textColor" red="0.98039215686274506" green="0.78431372549019607" blue="0.074509803921568626" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="25" translatesAutoresizingMaskIntoConstraints="NO" id="Cjf-Be-RqH">
-                                <rect key="frame" x="0.0" y="628" width="375" height="39"/>
+                                <rect key="frame" x="0.0" y="529" width="320" height="39"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <color key="textColor" red="0.98039215686274506" green="0.78431372549019607" blue="0.074509803921568626" alpha="1" colorSpace="calibratedRGB"/>
